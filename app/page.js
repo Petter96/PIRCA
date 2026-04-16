@@ -7,7 +7,7 @@ import "./Login.css";
 
 const MOCK_USERS = [
   { id: 1, username: 'admin',  password: '1234',   role: 'admin'   },
-  { id: 2, username: 'pedro',  password: 'abc123',  role: 'father' },
+  { id: 2, username: 'pedro',  password: 'abc123',  role: 'parent' },
   { id: 3, username: 'maria',  password: 'pass456', role: 'teacher' },
 ];
 
@@ -35,7 +35,7 @@ export default function Home() {
 
       const routes = {
         admin: '/views/administrativo-view',
-        father: '/views/padre-view',
+        parent: '/views/padre-view',
         teacher: '/views/docente-view',
       };
 

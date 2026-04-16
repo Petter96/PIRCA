@@ -10,17 +10,19 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
 
 const alumnosData = [
-  { id: 1, nombre: 'Juan Pérez González', grupo: '1A' },
-  { id: 2, nombre: 'María García López', grupo: '1A' },
-  { id: 3, nombre: 'Carlos López Hernández', grupo: '1B' },
   { id: 4, nombre: 'Ana Martínez Ruiz', grupo: '2A' },
   { id: 5, nombre: 'Pedro Sánchez Torres', grupo: '2A' },
-  { id: 6, nombre: 'Laura Rodríguez Díaz', grupo: '2B' },
-  { id: 7, nombre: 'Miguel Fernández Castro', grupo: '3A' },
-  { id: 8, nombre: 'Sofía Ramírez Morales', grupo: '3B' },
+  { id: 8, nombre: 'Jorge Ramírez Castillo', grupo: '2A' },
+  { id: 9, nombre: 'Patricia Morales Vega', grupo: '2A' },
+  { id: 10, nombre: 'Ricardo Torres Mendoza', grupo: '2A' },
+  { id: 11, nombre: 'Elena Castro Navarro', grupo: '2A' },
+  { id: 12, nombre: 'Fernando Ruiz Ortega', grupo: '2A' },
+  { id: 13, nombre: 'Gabriela Sánchez Cruz', grupo: '2A' },
+  { id: 14, nombre: 'Diego López Salazar', grupo: '2A' },
+  { id: 15, nombre: 'Valeria Jiménez Paredes', grupo: '2A' },
 ];
 
-export default function AdminDashboard() {
+export default function PatherDashboard() {
   const router = useRouter();
   const [user, setUser] = useState(null);
 
@@ -31,7 +33,7 @@ export default function AdminDashboard() {
       return;
     }
     const parsed = JSON.parse(stored);
-    if (parsed.role !== 'admin') {
+    if (parsed.role !== 'teacher') {
       router.push('/');
       return;
     }
@@ -46,7 +48,7 @@ export default function AdminDashboard() {
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div>
             <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-              Panel Administrativo
+              Panel Docente
             </Typography>
 
             <Typography variant="h6">
@@ -59,11 +61,11 @@ export default function AdminDashboard() {
         </div>
       </header>
 
-      <main className="container mx-auto px-6 py-8">
+      <main className="container mx-auto px-6 py-10">
         <Card>
           <CardHeader
             title={<Typography variant="h6" sx={{ fontWeight: 700 }}>Lista de Alumnos</Typography>}
-            subheader="Registro de alumnos con su grupo asignado."
+            subheader="Listado de alumnos de la materia asignada."
           />
           <CardContent>
             <Table>
@@ -71,7 +73,6 @@ export default function AdminDashboard() {
                 <TableRow>
                   <TableCell className="w-80px">No.</TableCell>
                   <TableCell>Nombre del Alumno</TableCell>
-                  <TableCell>Grupo</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -79,9 +80,6 @@ export default function AdminDashboard() {
                   <TableRow key={alumno.id}>
                     <TableCell className="font-medium">{alumno.id}</TableCell>
                     <TableCell className="font-medium">{alumno.nombre}</TableCell>
-                    <TableCell>
-                      <Badge>{alumno.grupo}</Badge>
-                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
