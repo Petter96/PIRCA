@@ -1,4 +1,45 @@
+# PIRCA (Plataforma Integra de Registro y Consulta de Alumnado)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Academic Context
+This project is based on the class presented in the course **Analysis and System Design** (*Análisis y Diseño de Sistemas*). The architecture and data model of this application were derived from this diagram, which served as the foundation for deining the entities, relationships, and resposibilities of each component of the system.
+
+<p align="center">
+  <img width="731" height="788" alt="Diagrama de Clases drawio" src="https://github.com/user-attachments/assets/a6934f76-8bcb-4a4e-8025-ef47d6a40b5d" />
+</p>
+
+## Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/), or [bun](https://bun.sh/)
+- [React](https://react.dev/) — UI component library (included with Next.js)
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/username/repo-name.git
+   cd repo-name
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+> **Note:** All dependencies are already listed in `package.json`. Running `npm install` in step 2 will install them automatically.
+
 
 ## Getting Started
 
