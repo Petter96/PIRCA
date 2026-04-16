@@ -8,7 +8,7 @@ import "./Login.css";
 const MOCK_USERS = [
   { id: 1, username: 'admin',  password: '1234',   role: 'admin'   },
   { id: 2, username: 'pedro',  password: 'abc123',  role: 'parent' },
-  { id: 3, username: 'maria',  password: 'pass456', role: 'teacher' },
+  { id: 3, username: 'maria',  password: 'pass456', role: 'teacher', subject: 'Matemáticas' },
 ];
 
 export default function Home() {

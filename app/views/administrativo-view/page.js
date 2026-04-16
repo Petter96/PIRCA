@@ -10,14 +10,14 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
 
 const alumnosData = [
-  { id: 1, nombre: 'Juan Pérez González', grupo: '1A' },
-  { id: 2, nombre: 'María García López', grupo: '1A' },
-  { id: 3, nombre: 'Carlos López Hernández', grupo: '1B' },
-  { id: 4, nombre: 'Ana Martínez Ruiz', grupo: '2A' },
-  { id: 5, nombre: 'Pedro Sánchez Torres', grupo: '2A' },
-  { id: 6, nombre: 'Laura Rodríguez Díaz', grupo: '2B' },
-  { id: 7, nombre: 'Miguel Fernández Castro', grupo: '3A' },
-  { id: 8, nombre: 'Sofía Ramírez Morales', grupo: '3B' },
+  { id: 1, nombre: 'Juan Pérez González', grupo: '1A', matricula:'MVIU004' },
+  { id: 2, nombre: 'María García López', grupo: '1A', matricula:'MVIU002' },
+  { id: 3, nombre: 'Carlos López Hernández', grupo: '1B', matricula:'MVIU003' },
+  { id: 4, nombre: 'Ana Martínez Ruiz', grupo: '2A', matricula:'MVIU090' },
+  { id: 5, nombre: 'Pedro Sánchez Torres', grupo: '2A', matricula:'MVIU005' },
+  { id: 6, nombre: 'Laura Rodríguez Díaz', grupo: '2B', matricula:'MVIU006' },
+  { id: 7, nombre: 'Miguel Fernández Castro', grupo: '3A', matricula:'MVIU007' },
+  { id: 8, nombre: 'Sofía Ramírez Morales', grupo: '3B', matricula:'MVIU008' },
 ];
 
 export default function AdminDashboard() {
@@ -71,6 +71,7 @@ export default function AdminDashboard() {
                 <TableRow>
                   <TableCell className="w-80px">No.</TableCell>
                   <TableCell>Nombre del Alumno</TableCell>
+                  <TableCell>Matrícula</TableCell>
                   <TableCell>Grupo</TableCell>
                 </TableRow>
               </TableHead>
@@ -79,6 +80,7 @@ export default function AdminDashboard() {
                   <TableRow key={alumno.id}>
                     <TableCell className="font-medium">{alumno.id}</TableCell>
                     <TableCell className="font-medium">{alumno.nombre}</TableCell>
+                    <TableCell className="font-medium">{alumno.matricula}</TableCell>
                     <TableCell>
                       <Badge>{alumno.grupo}</Badge>
                     </TableCell>

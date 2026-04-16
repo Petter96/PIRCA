@@ -10,7 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
 
 const alumnosData = [
-  { id: 9, nombre: 'Patricia Morales Vega', grupo: '2A' },
+  { id: 9, nombre: 'Patricia Morales Vega', grupo: '2A', matricula: 'MVIU009' },
 ];
 
 export default function PatherDashboard() {
@@ -64,6 +64,7 @@ export default function PatherDashboard() {
                 <TableRow>
                   <TableCell className="w-80px">No.</TableCell>
                   <TableCell>Nombre del hijo</TableCell>
+                  <TableCell>Matrícula</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -71,6 +72,7 @@ export default function PatherDashboard() {
                   <TableRow key={alumno.id}>
                     <TableCell className="font-medium">{alumno.id}</TableCell>
                     <TableCell className="font-medium">{alumno.nombre}</TableCell>
+                    <TableCell className="font-medium">{alumno.matricula}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

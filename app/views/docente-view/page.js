@@ -10,19 +10,19 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
 
 const alumnosData = [
-  { id: 4, nombre: 'Ana Martínez Ruiz', grupo: '2A' },
-  { id: 5, nombre: 'Pedro Sánchez Torres', grupo: '2A' },
-  { id: 8, nombre: 'Jorge Ramírez Castillo', grupo: '2A' },
-  { id: 9, nombre: 'Patricia Morales Vega', grupo: '2A' },
-  { id: 10, nombre: 'Ricardo Torres Mendoza', grupo: '2A' },
-  { id: 11, nombre: 'Elena Castro Navarro', grupo: '2A' },
-  { id: 12, nombre: 'Fernando Ruiz Ortega', grupo: '2A' },
-  { id: 13, nombre: 'Gabriela Sánchez Cruz', grupo: '2A' },
-  { id: 14, nombre: 'Diego López Salazar', grupo: '2A' },
-  { id: 15, nombre: 'Valeria Jiménez Paredes', grupo: '2A' },
+  { id: 4, nombre: 'Ana Martínez Ruiz', grupo: '2A', matricula: 'MVIU003' },
+  { id: 5, nombre: 'Pedro Sánchez Torres', grupo: '2A', matricula: 'MVIU005' },
+  { id: 8, nombre: 'Jorge Ramírez Castillo', grupo: '2A', matricula: 'MVIU008' },
+  { id: 9, nombre: 'Patricia Morales Vega', grupo: '2A', matricula: 'MVIU009' },
+  { id: 10, nombre: 'Ricardo Torres Mendoza', grupo: '2A', matricula: 'MVIU010' },
+  { id: 11, nombre: 'Elena Castro Navarro', grupo: '2A', matricula: 'MVIU011' },
+  { id: 12, nombre: 'Fernando Ruiz Ortega', grupo: '2A', matricula: 'MVIU012' },
+  { id: 13, nombre: 'Gabriela Sánchez Cruz', grupo: '2A', matricula: 'MVIU013' },
+  { id: 14, nombre: 'Diego López Salazar', grupo: '2A', matricula: 'MVIU014' },
+  { id: 15, nombre: 'Valeria Jiménez Paredes', grupo: '2A', matricula: 'MVIU015' },
 ];
 
-export default function PatherDashboard() {
+export default function TeacherDashboard() {
   const router = useRouter();
   const [user, setUser] = useState(null);
 
@@ -52,7 +52,7 @@ export default function PatherDashboard() {
             </Typography>
 
             <Typography variant="h6">
-              Bienvenido, <span className="font-medium">{user?.username}</span>
+              Bienvenido, <span className="font-medium">{user?.username}</span> — Materia: <span className="font-medium">{user?.subject}</span>
             </Typography>
           </div>
           <Button variant="outline" onClick={() => { sessionStorage.clear(); router.push('/'); }} startIcon={<LogoutIcon />}>
@@ -73,6 +73,7 @@ export default function PatherDashboard() {
                 <TableRow>
                   <TableCell className="w-80px">No.</TableCell>
                   <TableCell>Nombre del Alumno</TableCell>
+                  <TableCell>Matrícula</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -80,6 +81,7 @@ export default function PatherDashboard() {
                   <TableRow key={alumno.id}>
                     <TableCell className="font-medium">{alumno.id}</TableCell>
                     <TableCell className="font-medium">{alumno.nombre}</TableCell>
+                    <TableCell className="font-medium">{alumno.matricula}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
