@@ -1,34 +1,26 @@
-// import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import Button from '@mui/material/Button';
-// import Badge from '@mui/material/Badge';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
+
+import { useAuth } from '../../components/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const alumnosData = [
   { id: 9, nombre: 'Patricia Morales Vega', grupo: '2A', matricula: 'MVIU009' },
 ];
 
 function Padre() {
-  //   const router = useRouter();
-  //   const [user, setUser] = useState(null);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     const stored = sessionStorage.getItem('currentUser');
-  //     if (!stored) {
-  //       router.push('/');
-  //       return;
-  //     }
-  //     const parsed = JSON.parse(stored);
-  //     if (parsed.role !== 'parent') {
-  //       router.push('/');
-  //       return;
-  //     }
-  //     setUser(parsed);
-  //   }, []);
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  }
 
-  //   if (!user) return <p>Cargando...</p>;
+  if (!user) return null;
 
   return (
     <div className="min-h-screen bg-background">
@@ -40,10 +32,10 @@ function Padre() {
             </Typography>
 
             <Typography variant="h6">
-              Bienvenido, 
+              Bienvenido, {user.username || user.id}
             </Typography>
           </div>
-          <Button variant="outline" onClick={() => { sessionStorage.clear(); router.push('/'); }} startIcon={<LogoutIcon />}>
+          <Button variant="outline" onClick={handleLogout} startIcon={<LogoutIcon />}>
             Cerrar sesión
           </Button>
         </div>

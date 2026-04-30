@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaLock } from 'react-icons/fa';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../../components/context/AuthContext';
 import '../Login/Login.css';
 
 function Login() {
