@@ -1,0 +1,62 @@
+/* Padre.css */
+.dashboard-container {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header-panel {
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-text {
+    color: #64748b;
+    margin-top: 4px !important;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+/* Estilos para la Card de Material UI */
+.custom-card {
+    border-radius: 12px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid #f1f5f9;
+}
+
+.table-header-cell {
+    background-color: #f1f5f9 !important;
+    font-weight: bold !important;
+    color: #475569 !important;
+    text-transform: uppercase;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.05em;
+}
+
+.table-row:hover {
+    background-color: #f8fafc !important;
+    transition: background-color 0.2s ease;
+}
+
+.logout-button {
+    border-radius: 8px !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+}
