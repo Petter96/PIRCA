@@ -1,10 +1,7 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+// import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import Button from '@mui/material/Button';
-import Badge from '@mui/material/Badge';
+// import Badge from '@mui/material/Badge';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
@@ -13,25 +10,25 @@ const alumnosData = [
   { id: 9, nombre: 'Patricia Morales Vega', grupo: '2A', matricula: 'MVIU009' },
 ];
 
-export default function PatherDashboard() {
-  const router = useRouter();
-  const [user, setUser] = useState(null);
+function Padre() {
+  //   const router = useRouter();
+  //   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const stored = sessionStorage.getItem('currentUser');
-    if (!stored) {
-      router.push('/');
-      return;
-    }
-    const parsed = JSON.parse(stored);
-    if (parsed.role !== 'parent') {
-      router.push('/');
-      return;
-    }
-    setUser(parsed);
-  }, []);
+  //   useEffect(() => {
+  //     const stored = sessionStorage.getItem('currentUser');
+  //     if (!stored) {
+  //       router.push('/');
+  //       return;
+  //     }
+  //     const parsed = JSON.parse(stored);
+  //     if (parsed.role !== 'parent') {
+  //       router.push('/');
+  //       return;
+  //     }
+  //     setUser(parsed);
+  //   }, []);
 
-  if (!user) return <p>Cargando...</p>;
+  //   if (!user) return <p>Cargando...</p>;
 
   return (
     <div className="min-h-screen bg-background">
@@ -43,7 +40,7 @@ export default function PatherDashboard() {
             </Typography>
 
             <Typography variant="h6">
-              Bienvenido, <span className="font-medium">{user?.username}</span>
+              Bienvenido, 
             </Typography>
           </div>
           <Button variant="outline" onClick={() => { sessionStorage.clear(); router.push('/'); }} startIcon={<LogoutIcon />}>
@@ -83,3 +80,5 @@ export default function PatherDashboard() {
     </div>
   );
 }
+
+export { Padre };
