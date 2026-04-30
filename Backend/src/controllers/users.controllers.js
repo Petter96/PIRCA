@@ -23,18 +23,7 @@ export const loginUser = async (req, res) => {
     const { id_usuario, contrasena } = req.body;
 
     try {
-        const query = `
-            SELECT 
-                l.*, 
-                COALESCE(p.nombre || ' ' || p.apellido, 
-                         d.nombre || ' ' || d.apellido, 
-                         a.nombre || ' ' || a.apellido) AS nombre_completo
-            FROM login l
-            LEFT JOIN padres p ON l.Padre_id = p.id_padre
-            LEFT JOIN docentes d ON l.Matricula_docente = d.matricula_docente
-            LEFT JOIN administrativos a ON l.Matricula_admin = a.matricula_admin
-            WHERE l.id_usuario = $1
-        `;
+        const query = `SELECT l.*, COALESCE(p.nombre || ' ' || p.apellido, d.nombre || ' ' || d.apellido, a.nombre || ' ' || a.apellido) AS nombre_completo FROM login l LEFT JOIN padres p ON l.Padre_id = p.id_padre LEFT JOIN docentes d ON l.Matricula_docente = d.matricula_docente LEFT JOIN administrativos a ON l.Matricula_admin = a.matricula_admin WHERE l.id_usuario = $1`;
 
         const result = await pool.query(query, [id_usuario]);
 

@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import { useAuth } from '../../components/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+import './Padre.css'
+
 const alumnosData = [
   { id: 9, nombre: 'Patricia Morales Vega', grupo: '2A', matricula: 'MVIU009' },
 ];
@@ -23,45 +25,48 @@ function Padre() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b shadow-sm">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+    <div className="dashboard-container">
+      <header className="header-panel">
+        <div className="header-content">
           <div>
-            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+            <Typography variant="h4" sx={{ fontWeight: 800, color: '#1e293b' }}>
               Panel de Padre de Familia
             </Typography>
 
-            <Typography variant="h6">
+            <Typography variant="body1" className="welcome-text">
               Bienvenido, {user?.nombre}
             </Typography>
           </div>
-          <Button variant="outline" onClick={handleLogout} startIcon={<LogoutIcon />}>
+          <Button variant="outlined" color="error" className="logout-button" onClick={handleLogout} startIcon={<LogoutIcon />}>
             Cerrar sesión
           </Button>
         </div>
       </header>
 
-      <main className="container mx-auto px-6 py-10">
-        <Card>
+      <main className="main-content">
+        <Card className="custom-card">
           <CardHeader
-            title={<Typography variant="h6" sx={{ fontWeight: 700 }}>Hijo inscrito</Typography>}
-            subheader="Listado de hijos inscritos en la institución"
+            title={<Typography variant="h5" sx={{ fontWeight: 700, color: '#334155' }}>Hijos Inscritos</Typography>}
+            subheader="Consulta el listado y matrículas de tus hijos"
+            sx={{ borderBottom: '1px solid #f1f5f9', padding: '24px' }}
           />
-          <CardContent>
+          <CardContent sx={{ padding: 0 }}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell className="w-80px">No.</TableCell>
-                  <TableCell>Nombre del hijo</TableCell>
-                  <TableCell>Matrícula</TableCell>
+                  <TableCell className="table-header-cell">No.</TableCell>
+                  <TableCell className="table-header-cell">Nombre del hijo</TableCell>
+                  <TableCell className="table-header-cell">Matrícula</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {alumnosData.map((alumno) => (
-                  <TableRow key={alumno.id}>
-                    <TableCell className="font-medium">{alumno.id}</TableCell>
-                    <TableCell className="font-medium">{alumno.nombre}</TableCell>
-                    <TableCell className="font-medium">{alumno.matricula}</TableCell>
+                  <TableRow key={alumno.id} className="table-row">
+                    <TableCell sx={{ color: '#64748b' }}>{alumno.id}</TableCell>
+                    <TableCell sx={{ fontWeight: 600, color: '#1e293b' }}>{alumno.nombre}</TableCell>
+                    <TableCell>
+                        <span className="matricula-badge">{alumno.matricula}</span>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
