@@ -1,21 +1,46 @@
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
 
+
 import { useAuth } from '../../components/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 import './Padre.css'
 
-const alumnosData = [
-  { id: 9, nombre: 'Patricia Morales Vega', grupo: '2A', matricula: 'MVIU009' },
-];
-
 function Padre() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+
+  const [alumnos, setAlumnos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAlumnos = async () => {
+      try {
+        const response = await fetch(`http://localhost:4000/alumnos/${user.perfilId}`);
+
+        if (!response.ok) {
+          throw new Error('Error en la petición');
+        }
+
+        const data = await response.json();
+        setAlumnos(data);
+
+      } catch (error) {
+        console.error('Error al obtener los datos del hijo:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user?.perfilId) {
+      fetchAlumnos();
+    }
+  }, [user]);
 
   const handleLogout = () => {
     logout();
@@ -54,19 +79,21 @@ function Padre() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell className="table-header-cell">No.</TableCell>
-                  <TableCell className="table-header-cell">Nombre del hijo</TableCell>
-                  <TableCell className="table-header-cell">Matrícula</TableCell>
+                  <TableCell className="table-header-cell">Alumno</TableCell>
+                  <TableCell className="table-header-cell">Grupo</TableCell>
+                  <TableCell className="table-header-cell">Materia</TableCell>
+                  <TableCell className="table-header-cell">Calificación</TableCell>
+                  <TableCell className="table-header-cell">Observaciones</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {alumnosData.map((alumno) => (
-                  <TableRow key={alumno.id} className="table-row">
-                    <TableCell sx={{ color: '#64748b' }}>{alumno.id}</TableCell>
-                    <TableCell sx={{ fontWeight: 600, color: '#1e293b' }}>{alumno.nombre}</TableCell>
-                    <TableCell>
-                        <span className="matricula-badge">{alumno.matricula}</span>
-                    </TableCell>
+                {alumnos.map((item, index) => (
+                  <TableRow key={index} className="table-row">
+                    <TableCell sx={{ color: '#64748b' }}>{item.nombre_alumno} {item.apellido_alumno}</TableCell>
+                    <TableCell sx={{ fontWeight: 600, color: '#1e293b' }}>{item.grupo}</TableCell>
+                    <TableCell sx={{ fontWeight: 600, color: '#1e293b' }}>{item.materia}</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', color: item.calificacion < 6 ? '#d32f2f' : '#2e7d32' }}>{item.calificacion ?? 'S/C'}</TableCell>
+                    <TableCell sx={{ fontStyle: 'italic', color: '#64748b' }}>{item.observaciones || 'Sin observaciones'}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

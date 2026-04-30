@@ -41,6 +41,11 @@
     border: 1px solid #f1f5f9;
 }
 
+.custom-card .MuiTableCell-root {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
 .table-header-cell {
     background-color: #f1f5f9 !important;
     font-weight: bold !important;
