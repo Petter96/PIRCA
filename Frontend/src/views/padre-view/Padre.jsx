@@ -32,7 +32,7 @@ function Padre() {
             </Typography>
 
             <Typography variant="h6">
-              Bienvenido, {user.username || user.id}
+              Bienvenido, {user?.nombre}
             </Typography>
           </div>
           <Button variant="outline" onClick={handleLogout} startIcon={<LogoutIcon />}>

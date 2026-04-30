@@ -23,29 +23,41 @@ export const loginUser = async (req, res) => {
     const { id_usuario, contrasena } = req.body;
 
     try {
-        // En Postgres con 'pg', la consulta devuelve un objeto
-        const result = await pool.query(
-            'SELECT * FROM login WHERE id_usuario = $1',
-            [id_usuario]
-        );
+        const query = `
+            SELECT 
+                l.*, 
+                COALESCE(p.nombre || ' ' || p.apellido, 
+                         d.nombre || ' ' || d.apellido, 
+                         a.nombre || ' ' || a.apellido) AS nombre_completo
+            FROM login l
+            LEFT JOIN padres p ON l.Padre_id = p.id_padre
+            LEFT JOIN docentes d ON l.Matricula_docente = d.matricula_docente
+            LEFT JOIN administrativos a ON l.Matricula_admin = a.matricula_admin
+            WHERE l.id_usuario = $1
+        `;
 
-        // Verificamos si encontramos al usuario
+        const result = await pool.query(query, [id_usuario]);
+
         if (result.rows.length === 0) {
-            return res.status(401).json({ message: "El usuario no existe" });
+            return res.status(401).json({ message: "Usuario no encontrado" });
         }
 
         const user = result.rows[0];
 
-        // Validar contraseña
+        // Validamos contra 'contrasena' (como está en tu tabla)
         if (user.contrasena !== contrasena) {
             return res.status(401).json({ message: "Contraseña incorrecta" });
         }
 
-        // Determinar perfilId (usando los nombres de tu tabla)
         const perfilId = user.padre_id || user.matricula_docente || user.matricula_admin;
 
         const token = jwt.sign(
-            { id: user.id_usuario, rol: user.rol, perfilId },
+            {
+                id: user.id_usuario,
+                nombre: user.nombre_completo,
+                rol: user.rol,
+                perfilId
+            },
             JWT_SECRET,
             { expiresIn: '3h' }
         );
@@ -54,6 +66,7 @@ export const loginUser = async (req, res) => {
             token,
             user: {
                 id: user.id_usuario,
+                nombre: user.nombre_completo, // Enviamos "Ana Garcia", "Carlos Lopez", etc.
                 rol: user.rol,
                 perfilId: perfilId
             }
