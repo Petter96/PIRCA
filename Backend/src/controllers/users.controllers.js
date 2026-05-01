@@ -115,18 +115,29 @@ export const getAlumnoPadre = async (req, res) => {
 };
 
 // getAlumnoVistaDocente
-export const getAlumnoDocente =async (req, res) => {
+export const getAlumnoDocente = async (req, res) => {
     try {
         const { docenteId } = req.params;
         const { rows } = await pool.query(`SELECT m.nombre AS materia, g.grado, g.nombre AS grupo, a.id_alumno AS matricula_alumno, a.nombre || ' ' || a.apellido AS nombre_alumno, c.calificacion, c.observaciones FROM grupomateria gm JOIN materia m ON gm.Materia_id = m.id_materia JOIN grupo g ON gm.Grupo_id = g.id_grupo JOIN alumnos a ON a.Grupo_id = g.id_grupo LEFT JOIN calificaciones c ON c.Alumno_id = a.id_alumno AND c.Grupomateria_id = gm.id_grupomateria WHERE gm.Matricula_docente = $1;`, [docenteId]);
 
         if (rows.length === 0) {
-            return res.status(404).json({ message: "Subjects not assigned"})
+            return res.status(404).json({ message: "Subjects not assigned" })
         }
         res.json(rows);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Alumnos not found"})
+        res.status(500).json({ message: "Alumnos not found" })
+    }
+};
+
+//getAlumnoVistaAdministrativo
+export const getAlumnosAdmin = async (req, res) => {
+    try {
+        const { rows } = await pool.query('SELECT a.id_alumno AS matricula, a.nombre, a.apellido, g.grado, g.nombre AS grupo, COALESCE(ROUND(AVG(c.calificacion), 2), 0) AS calificacion_general FROM alumnos a INNER JOIN grupo g ON a.Grupo_id = g.id_grupo LEFT JOIN calificaciones c ON a.id_alumno = c.Alumno_id GROUP BY a.id_alumno, a.nombre, a.apellido, g.grado, g.nombre ORDER BY g.grado, g.nombre, a.apellido;');
+        res.json(rows);
+    } catch (error) {
+        console.error("getAlumnosAdmin error", error);
+        res.status(500).json({ message: "Alumnos list errro" });
     }
 };
 
