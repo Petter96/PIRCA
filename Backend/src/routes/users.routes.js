@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUser, deleteUser, getAlumnoPadre, getAlumnos, getUser, getUsers, loginUser, updateUser } from '../controllers/users.controllers.js';
+import { createUser, deleteUser, getAlumnoDocente, getAlumnoPadre, getAlumnos, getUser, getUsers, loginUser, updateUser } from '../controllers/users.controllers.js';
 
 const router = Router();
 
@@ -9,6 +9,9 @@ router.get('/users', getAlumnos);
 
 /*Obtener los datos del hijo desde el Padre*/
 router.get('/alumnos/:padreId', getAlumnoPadre);
+
+/*Obtener los datos de los alumnos de una clase desde Docentes*/
+router.get('/alumnos/docente/:docenteId', getAlumnoDocente);
 
 /*Obtener un usuario por ID*/
 router.get('/users/:id', getUser);
