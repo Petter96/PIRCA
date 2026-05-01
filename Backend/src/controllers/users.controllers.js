@@ -161,6 +161,7 @@ export const createUser = async (req, res) => {
     }
 };
 
+// createDocente
 export const createDocente = async (req, res) => {
     try {
         const data = req.body
@@ -179,25 +180,6 @@ export const createDocente = async (req, res) => {
         return res.status(500).json({ message: "Internal Server Error" });
     }
 };
-
-// export const createAlumno = async (req, res) => {
-//     try {
-//         const data = req.body
-//         console.log(data);
-//         const result = await pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [data.name, data.email]);
-//         console.log(result);
-
-//         return res.json(rows[0]);
-//     } catch (error) {
-//         console.log(error);
-
-//         if (error?.code === '23505') {
-//             return res.status(409).json({ message: "Email already exists" });
-//         }
-
-//         return res.status(500).json({ message: "Internal Server Error" });
-//     }
-// };
 
 // deleteUser
 export const deleteUser = async (req, res) => {
