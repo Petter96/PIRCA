@@ -33,7 +33,7 @@ export const loginUser = async (req, res) => {
 
         const user = result.rows[0];
 
-        // Validamos contra 'contrasena' (como está en tu tabla)
+        // Validamos contra 'contrasena'
         if (user.contrasena !== contrasena) {
             return res.status(401).json({ message: "Contraseña incorrecta" });
         }
@@ -55,14 +55,14 @@ export const loginUser = async (req, res) => {
             token,
             user: {
                 id: user.id_usuario,
-                nombre: user.nombre_completo, // Enviamos "Ana Garcia", "Carlos Lopez", etc.
+                nombre: user.nombre_completo, 
                 rol: user.rol,
                 perfilId: perfilId
             }
         });
 
     } catch (error) {
-        // Esto imprimirá el error real en tu terminal de Node
+       
         console.error("Error en Postgres:", error.stack);
         return res.status(500).json({ message: "Error interno del servidor" });
     }
