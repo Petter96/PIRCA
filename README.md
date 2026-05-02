@@ -24,7 +24,7 @@ Make sure you have the following installed:
 
 ## Project Structure
 
-This project is separated into two main fiolders:
+This project is separated into two main folders:
 
 - `Backend/` — contains the API and server-side logic.
 - `Frontend/` — contains the web application built with React + Vite.
