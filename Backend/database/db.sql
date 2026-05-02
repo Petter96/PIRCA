@@ -120,6 +120,7 @@ CREATE TABLE alumnos (
 
 --Datos de ejemplo--
 INSERT INTO alumnos (id_alumno, nombre, apellido, f_nacimiento, t_sangre, Grupo_id) VALUES ('P92100042', 'Pedro', 'Diaz', '26-05-2003', 'O+', 1);
+INSERT INTO alumnos (id_alumno, nombre, apellido, grupo_id) VALUES ('ALU001', 'Juan', 'Pérez', 1), ('ALU002', 'María', 'García', 1), ('ALU003', 'Carlos', 'Rodríguez', 1), ('ALU004', 'Ana', 'Martínez', 1), ('ALU005', 'Luis', 'Sánchez', 1);
 
 --Parentesco--
 CREATE TABLE parentesco (
@@ -171,3 +172,4 @@ CREATE TABLE calificaciones (
 
 --Datos de ejemplo--
 INSERT INTO calificaciones (Alumno_id, Grupomateria_id, calificacion, observaciones) VALUES ('P92100042', 1, 95.50, 'Excelente desempeño');
+INSERT INTO calificaciones (alumno_id, grupomateria_id, calificacion, observaciones) VALUES ('ALU001', 1, 9.5, 'Excelente desempeño en el examen parcial'), ('ALU002', 1, 7.0, 'Cumplió con todas las tareas, requiere mejorar participación'), ('ALU003', 2, 5.5, 'No entregó el proyecto final de la materia'), ('ALU004', 2, 4.0, 'Faltas excesivas y bajo puntaje en evaluaciones'), ('ALU005', 1, 8.8, 'Participativo y con buenos resultados en prácticas');
