@@ -19,7 +19,7 @@ Make sure you have the following installed:
 - [Node.js](https://nodejs.org/) (v18 or higher recommended)
 - [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/), or [bun](https://bun.sh/)
 - [React](https://react.dev/) — UI library used in this project
-- [Vite](https://vite.dev/) — frontend build tool and development server [web:1][web:2]
+- [Vite](https://vite.dev/) — frontend build tool and development server.
 - A PostgreSQL database configured for the backend API.
 
 ## Project Structure
@@ -79,9 +79,9 @@ DB_PORT=5432
 JWT_SECRET=your_jwt_secret
 ```
 
-These variables are used to configure the database connection and JWT authentication in the backend. Using a `.env` file is a common way to keep configuration values separate from the source code [web:1][web:4].
+These variables are used to configure the database connection and JWT authentication in the backend. Using a `.env` file is a common way to keep configuration values separate from the source code.
 
-> **Important:** Do not upload the `.env` file to GitHub. Add it to `.gitignore` to avoid exposing sensitive credentials, which is standard practice for environment-variable-based configuration [web:3][web:9].
+> **Important:** Do not upload the `.env` file to GitHub. Add it to `.gitignore` to avoid exposing sensitive credentials, which is standard practice for environment-variable-based configuration.
 
 ## Running the Project
 
@@ -117,7 +117,7 @@ pnpm dev
 bun dev
 ```
 
-Vite uses `npm run dev` to start the local development server for the frontend [web:10].
+Vite uses `npm run dev` to start the local development server for the frontend.
 
 Then open the local URL shown in the terminal, usually something like:
 
@@ -138,26 +138,26 @@ A typical structure for this React + Vite project includes:
 - `src/main.jsx` or `src/main.tsx` — entry point
 - `public/` — static assets
 - `index.html` — main HTML file
-- `vite.config.js` or `vite.config.ts` — Vite configuration file [web:1]
+- `vite.config.js` or `vite.config.ts` — Vite configuration file.
 
 ## React Plugins
 
 Vite currently provides official plugins for React integration, including:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) [web:21]
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react)
 
 ## React Compiler
 
-The React template referenced for Vite includes support information for the React Compiler. According to React’s documentation, the compiler can be used in modern React workflows, although enabling it may affect development and build performance depending on the project configuration. [web:2]
+The React template referenced for Vite includes support information for the React Compiler. According to React’s documentation, the compiler can be used in modern React workflows, although enabling it may affect development and build performance depending on the project configuration.
 
 ## Learn More
 
 To learn more about the tools used in this project, check the following resources:
 
-- [Vite Documentation](https://vite.dev/guide/) [web:1]
-- [React Documentation](https://react.dev/) [web:2]
-- [React Compiler Documentation](https://react.dev/learn/react-compiler) [web:2]
+- [Vite Documentation](https://vite.dev/guide/)
+- [React Documentation](https://react.dev/)
+- [React Compiler Documentation](https://react.dev/learn/react-compiler)
 
 ## Notes
 
