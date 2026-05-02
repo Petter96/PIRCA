@@ -1,6 +1,8 @@
 # PIRCA (Plataforma Integral de Registro y Consulta de Alumnado)
 
-PIRCA is a web application focused on the registration, management, and consultation of student information. This project is currently built with **React + Vite**.
+This project is currently built with **React + Vite**.
+
+PIRCA is a web application focused on the registration, management, and consultation of student information.  This project is currently organized into two parts: **Frontend** and **Backend**.
 
 ## Academic Context
 
@@ -18,6 +20,14 @@ Make sure you have the following installed:
 - [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/), or [bun](https://bun.sh/)
 - [React](https://react.dev/) — UI library used in this project
 - [Vite](https://vite.dev/) — frontend build tool and development server [web:1][web:2]
+- A PostgreSQL database configured for the backend API.
+
+## Project Structure
+
+This project is separated into two main fiolders:
+
+- `Backend/` — contains the API and server-side logic.
+- `Frontend/` — contains the web application built with React + Vite.
 
 ## Installation
 
@@ -28,9 +38,21 @@ Make sure you have the following installed:
    cd repo-name
    ```
 
-2. Install dependencies:
+2. Install dependencies in both folders:
 
    ```bash
+   cd Backend
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+   ```bash
+   cd Frontend
    npm install
    # or
    yarn install
@@ -42,11 +64,50 @@ Make sure you have the following installed:
 
 > **Note:** All dependencies are already listed in `package.json`. Running any of the install commands above will install them automatically.
 
-## Getting Started
+## Backend Configuration
 
-First, run the development server:
+Before starting the backend, create a `.env` file inside the `Backend` folder.
+
+Example:
+
+```env
+DB_USER=your_database_user
+DB_HOST=localhost
+DB_PASSWORD=your_database_password
+DB_DATABASE=your_database_name
+DB_PORT=5432
+JWT_SECRET=your_jwt_secret
+```
+
+These variables are used to configure the database connection and JWT authentication in the backend. Using a `.env` file is a common way to keep configuration values separate from the source code [web:1][web:4].
+
+> **Important:** Do not upload the `.env` file to GitHub. Add it to `.gitignore` to avoid exposing sensitive credentials, which is standard practice for environment-variable-based configuration [web:3][web:9].
+
+## Running the Project
+
+To run the project correctly, you must start the backend and frontend separately.
+
+### 1. Start the backend API
+
+Open a terminal and run:
 
 ```bash
+cd Backend
+npm run dev
+```
+
+Or, if your backend uses a different start script:
+
+```bash
+npm start
+```
+
+### 2. Start the frontend
+
+Open another terminal and run:
+
+```bash
+cd Frontend
 npm run dev
 # or
 yarn dev
@@ -56,13 +117,19 @@ pnpm dev
 bun dev
 ```
 
-Then open the local URL shown in the terminal, usually:
+Vite uses `npm run dev` to start the local development server for the frontend [web:10].
+
+Then open the local URL shown in the terminal, usually something like:
 
 [http://localhost:5173](http://localhost:5173)
 
-Vite provides a fast local development server with Hot Module Replacement (HMR), so changes are reflected automatically while you edit the code. [web:1]
+## Notes
 
-## Project Structure
+- The `Backend` folder must be running for the API to respond correctly.
+- The `Frontend` folder must be running for the web interface to be available.
+- Make sure the backend database credentials in `.env` are correct before starting the API.
+
+## Project Structure Frontend
 
 A typical structure for this React + Vite project includes:
 
@@ -91,32 +158,6 @@ To learn more about the tools used in this project, check the following resource
 - [Vite Documentation](https://vite.dev/guide/) [web:1]
 - [React Documentation](https://react.dev/) [web:2]
 - [React Compiler Documentation](https://react.dev/learn/react-compiler) [web:2]
-
-## Build for Production
-
-To generate an optimized production build, run:
-
-```bash
-npm run build
-# or
-yarn build
-# or
-pnpm build
-# or
-bun run build
-```
-
-To preview the production build locally:
-
-```bash
-npm run preview
-# or
-yarn preview
-# or
-pnpm preview
-# or
-bun run preview
-```
 
 ## Notes
 
