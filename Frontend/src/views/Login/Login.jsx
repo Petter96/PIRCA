@@ -69,7 +69,7 @@ function Login() {
                         </p>} */}
 
                     <button type='submit'>
-                        Login uwu
+                        Login
                     </button>
 
                     <div className="register-link">
