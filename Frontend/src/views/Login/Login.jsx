@@ -16,10 +16,12 @@ function Login() {
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     }
+    
+    const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:4000/login', {
+        const res = await fetch(`${apiURL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(credentials)

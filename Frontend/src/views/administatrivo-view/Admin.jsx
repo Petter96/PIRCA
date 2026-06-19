@@ -20,7 +20,9 @@ function Admin() {
   useEffect(() => {
     const fetchAlumnosGeneral = async () => {
       try {
-        const response = await fetch('http://localhost:4000/alumnos-general/admin');
+        const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
+        const response = await fetch(`${apiURL}/alumnos-general/admin`);
 
         if (!response.ok) {
           throw new Error('Error en la petición');

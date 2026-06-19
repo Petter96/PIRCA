@@ -21,7 +21,9 @@ function Docente() {
   useEffect(() => {
     const fetchAlumnos = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/alumnos/docente/${user.perfilId}`);
+        const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
+        const response = await fetch(`${apiURL}/alumnos/docente/${user.perfilId}`);
 
         if (!response.ok) {
           throw new Error('Error en la petición');
@@ -56,7 +58,7 @@ function Docente() {
       <header className="header-panel">
         <div className="header-content">
           <div>
-              <Typography variant="h4" sx={{ fontWeight: 800, color: '#1e293b' }}>
+            <Typography variant="h4" sx={{ fontWeight: 800, color: '#1e293b' }}>
               Panel de Docente
             </Typography>
 

@@ -21,7 +21,9 @@ function Padre() {
   useEffect(() => {
     const fetchAlumnos = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/alumnos/${user.perfilId}`);
+        const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
+        const response = await fetch(`${apiURL}/alumnos/${user.perfilId}`);
 
         if (!response.ok) {
           throw new Error('Error en la petición');
