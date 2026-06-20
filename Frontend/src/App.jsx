@@ -2,6 +2,7 @@ import { Login } from './views/Login/Login';
 import { Padre } from './views/padre-view/Padre';
 import { Admin } from './views/administatrivo-view/Admin';
 import { Docente } from './views/docente-view/Docente';
+import { Loader } from './components/Loader/Loader';
 
 import { Route, Routes, Outlet } from 'react-router-dom';
 import './App.css';
@@ -22,6 +23,7 @@ function App() {
         <Route path='/padre' element={<Padre />} />
         <Route path='/administrativo' element={<Admin />} />
         <Route path='/docente' element={<Docente />} />
+        <Route path='/loader' element={<Loader />} />
       </Route>
     </Routes>
   )

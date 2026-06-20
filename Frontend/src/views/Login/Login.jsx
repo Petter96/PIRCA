@@ -53,15 +53,15 @@ function Login() {
         <div className='background'>
             <div className='wrapper'>
                 <form onSubmit={handleSubmit}>
-                    <h1>Login</h1>
+                    <h1>Inicio de sesión</h1>
 
                     <div className='input-box'>
-                        <input type='text' placeholder='Username' name="id_usuario" id='user' onChange={handleChange} />
+                        <input type='text' placeholder='Nombre de usuario' name="id_usuario" id='user' onChange={handleChange} />
                         <FaUser className='icon' />
                     </div>
 
                     <div className='input-box'>
-                        <input type='password' placeholder='Password' name="contrasena" id='pass' onChange={handleChange} />
+                        <input type='password' placeholder='Constraseña' name="contrasena" id='pass' onChange={handleChange} />
                         <FaLock className="icon" />
                     </div>
 
@@ -71,7 +71,7 @@ function Login() {
                         </p>} */}
 
                     <button type='submit'>
-                        Login
+                        Iniciar sesión
                     </button>
 
                     <div className="register-link">
