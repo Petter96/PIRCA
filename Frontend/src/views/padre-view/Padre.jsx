@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
 
+import { Loader } from '../../components/Loader/Loader';
 
 import { useAuth } from '../../components/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -20,9 +21,10 @@ function Padre() {
 
   useEffect(() => {
     const fetchAlumnos = async () => {
+      const startTime = Date.now();
+
       try {
         const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-
         const response = await fetch(`${apiURL}/alumnos/${user.perfilId}`);
 
         if (!response.ok) {
@@ -35,12 +37,24 @@ function Padre() {
       } catch (error) {
         console.error('Error al obtener los datos del hijo:', error);
       } finally {
-        setLoading(false);
+        const endTime = Date.now();
+        const duration = endTime - startTime;
+        const minimumTime = 2000;
+
+        if (duration < minimumTime) {
+          setTimeout(() => {
+            setLoading(false);
+          }, minimumTime - duration);
+        } else {
+          setLoading(false);
+        }
       }
     };
 
     if (user?.perfilId) {
       fetchAlumnos();
+    } else if (user === null) {
+      setLoading(false);
     }
   }, [user]);
 
@@ -50,6 +64,10 @@ function Padre() {
   }
 
   if (!user) return null;
+  
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="dashboard-container">

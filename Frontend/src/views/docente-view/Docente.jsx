@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
 
+import { Loader } from '../../components/Loader/Loader';
 
 import { useAuth } from '../../components/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -20,9 +21,10 @@ function Docente() {
 
   useEffect(() => {
     const fetchAlumnos = async () => {
+      const startTime = Date.now();
+
       try {
         const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-
         const response = await fetch(`${apiURL}/alumnos/docente/${user.perfilId}`);
 
         if (!response.ok) {
@@ -35,7 +37,17 @@ function Docente() {
       } catch (error) {
         console.error('Error al obtener los datos de los alumnos:', error);
       } finally {
-        setLoading(false);
+        const endTime = Date.now();
+        const duration = endTime - startTime;
+        const minimumTime = 2000;
+
+        if (duration < minimumTime) {
+          setTimeout(() => {
+            setLoading(false);
+          }, minimumTime - duration);
+        } else {
+          setLoading(false);
+        }
       }
     };
 
@@ -50,6 +62,10 @@ function Docente() {
   }
 
   if (!user) return null;
+
+  if (loading) {
+    return <Loader />;
+  }
 
   const infoClase = alumnos.length > 0 ? { materia: alumnos[0].materia, grado: alumnos[0].grado } : null;
 
