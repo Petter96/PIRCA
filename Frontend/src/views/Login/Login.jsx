@@ -13,48 +13,49 @@ function Login() {
         contrasena: ''
     });
 
+    // 1. Estado para el error
+    const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     }
-    
+
     const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch(`${apiURL}/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(credentials)
-        });
+        setError(''); // 2. Limpiar error antes de cada intento
 
-        const data = await res.json();
+        try {
+            const res = await fetch(`${apiURL}/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(credentials)
+            });
 
-        if (res.ok) {
-            login(data.user, data.token); // Guardamos en el Contexto
+            const data = await res.json();
 
-            // Redirección por Rol
-            switch (data.user.rol) {
-                case 'Administrativo':
-                    navigate('/administrativo');
-                    break;
-                case 'Docente':
-                    navigate('/docente');
-                    break;
-                case 'Padre':
-                    navigate('/padre');
-                    break;
-                default:
-                    navigate('/');
+            if (res.ok) {
+                login(data.user, data.token);
+
+                switch (data.user.rol) {
+                    case 'Administrativo': navigate('/administrativo'); break;
+                    case 'Docente': navigate('/docente'); break;
+                    case 'Padre': navigate('/padre'); break;
+                    default: navigate('/');
+                }
+            } else {
+                // 3. Usar el mensaje del servidor o uno genérico
+                setError( 'Usuario o contraseña incorrectos.');
             }
+        } catch (err) {
+            // 4. Error de red / servidor caído
+            setError('No se pudo conectar al servidor. Intenta más tarde.');
         }
     };
 
-    //Show password config
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    }
+    const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
     return (
         <div className='background'>
@@ -76,13 +77,11 @@ function Login() {
                         </div>
                     </div>
 
+                    {error && <p className="error-msg">{error}</p>}
+
                     <button type='submit' title="Iniciar sesión">
                         Iniciar sesión
                     </button>
-
-                    {/* <div className="register-link">
-                        <p>Don't have an account?<a href="#">Register</a></p>
-                    </div> */}
                 </form>
             </div>
         </div>
