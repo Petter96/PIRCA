@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaUser, FaLock } from 'react-icons/fa';
+import { FaUser, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from '../../components/context/AuthContext';
 import '../Login/Login.css';
 
@@ -49,6 +49,13 @@ function Login() {
         }
     };
 
+    //Show password config
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    }
+
     return (
         <div className='background'>
             <div className='wrapper'>
@@ -61,16 +68,15 @@ function Login() {
                     </div>
 
                     <div className='input-box'>
-                        <input type='password' placeholder='Constraseña' name="contrasena" id='pass' onChange={handleChange} />
-                        <FaLock className="icon" />
+                        <input type={showPassword ? 'text' : 'password'} placeholder='Constraseña' name="contrasena" id='pass' onChange={handleChange} />
+                        <div className='icons-container'>
+                            <button type="button" className="toggle-btn" onClick={togglePasswordVisibility} title={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}>
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
                     </div>
 
-                    {/* {error &&
-                        <p style={{ color: 'red', fontSize: '0.85rem', marginBottom: '10px' }}>
-                            {error}
-                        </p>} */}
-
-                    <button type='submit'>
+                    <button type='submit' title="Iniciar sesión">
                         Iniciar sesión
                     </button>
 

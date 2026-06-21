@@ -29,7 +29,7 @@ body {
 .wrapper {
   width: 100%;
   max-width: 420px;
-  padding: 36px 30px;
+  padding: 50px 30px;
   color: #ffffff;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.14);
@@ -55,13 +55,16 @@ body {
 
 .input-box {
   position: relative;
+  display: flex;
+  align-items: center;
   width: 100%;
 }
 
 .input-box input {
   width: 100%;
   height: 52px;
-  padding: 0 46px 0 18px;
+  padding: 10px;
+  padding-right: 65px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 14px;
   outline: none;
@@ -95,7 +98,6 @@ body {
   height: 52px;
   border: none;
   border-radius: 14px;
-  background: #ffffff;
   color: #1b2430;
   font-size: 16px;
   font-weight: 700;
@@ -149,4 +151,57 @@ body {
   .wrapper button {
     height: 50px;
   }
+}
+
+.icons-container {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.toggle-btn {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.88) !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.toggle-btn:hover {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 1);
+}
+
+.toggle-btn:focus,
+.toggle-btn:active {
+  outline: none !important;
+  background: transparent !important;
+}
+
+.toggle-btn:active {
+  transform: scale(0.92);
+}
+
+.icon {
+  color: #888;
+  font-size: 16px;
+}
+
+.input-box .icon {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.88);
+  display: flex;
+  align-items: center;
 }
