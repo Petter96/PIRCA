@@ -80,9 +80,9 @@ function Login() {
                         Iniciar sesión
                     </button>
 
-                    <div className="register-link">
+                    {/* <div className="register-link">
                         <p>Don't have an account?<a href="#">Register</a></p>
-                    </div>
+                    </div> */}
                 </form>
             </div>
         </div>

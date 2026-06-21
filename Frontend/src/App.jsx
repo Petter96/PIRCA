@@ -3,6 +3,8 @@ import { Padre } from './views/padre-view/Padre';
 import { Admin } from './views/administatrivo-view/Admin';
 import { Docente } from './views/docente-view/Docente';
 
+import { NotFound } from './components/NotFound/NotFound';
+
 import { Route, Routes, Outlet } from 'react-router-dom';
 import './App.css';
 
@@ -22,6 +24,8 @@ function App() {
         <Route path='/padre' element={<Padre />} />
         <Route path='/administrativo' element={<Admin />} />
         <Route path='/docente' element={<Docente />} />
+
+        <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
   )

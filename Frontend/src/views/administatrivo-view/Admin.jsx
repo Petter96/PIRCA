@@ -77,7 +77,7 @@ function Admin() {
               Bienvenido, {user?.nombre}
             </Typography>
           </div>
-          <Button variant="outlined" color="error" className="logout-button" onClick={handleLogout} startIcon={<LogoutIcon />}>
+          <Button variant="outlined" color="error" className="logout-button" onClick={handleLogout} startIcon={<LogoutIcon />} title="Cerrar sesión">
             Cerrar sesión
           </Button>
         </div>
