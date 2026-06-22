@@ -19,6 +19,8 @@ FROM
 ------------------------------------------------------------------------
 CREATE DATABASE pirca;
 
+SET datestyle = 'ISO, DMY';
+
 --Administrativos--
 CREATE TABLE administrativos (
     id_admin SERIAL PRIMARY KEY,
