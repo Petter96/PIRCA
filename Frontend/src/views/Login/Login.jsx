@@ -25,7 +25,12 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(''); // 2. Limpiar error antes de cada intento
+        setError('');
+
+        if (!credentials.id_usuario.trim() || !credentials.contrasena.trim()){
+            setError('Introduce tanto el usuario como la contraseña');
+            return;
+        }
 
         try {
             const res = await fetch(`${apiURL}/login`, {
@@ -46,11 +51,9 @@ function Login() {
                     default: navigate('/');
                 }
             } else {
-                // 3. Usar el mensaje del servidor o uno genérico
-                setError( 'Usuario o contraseña incorrectos.');
+                setError('Usuario o contraseña incorrectos.');
             }
         } catch (err) {
-            // 4. Error de red / servidor caído
             setError('No se pudo conectar al servidor. Intenta más tarde.');
         }
     };
