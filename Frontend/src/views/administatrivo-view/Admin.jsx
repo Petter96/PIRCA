@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@mui/material';
+import { useEffect, useState, useRef } from 'react';
+import { Card, CardContent, CardHeader, TextField, InputAdornment } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 
 import { Loader } from '../../components/Loader/Loader';
@@ -17,7 +18,10 @@ function Admin() {
   const navigate = useNavigate();
 
   const [alumnos, setAlumnos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
+  
+  const inputSearchRef = useRef(null);
 
   useEffect(() => {
     const fetchAlumnosGeneral = async () => {
@@ -58,6 +62,37 @@ function Admin() {
     navigate('/');
   }
 
+  const alumnosFiltrados = alumnos.filter((item) => {
+    const busqueda = searchTerm.toLowerCase();
+
+    const nombreCompleto = `${item?.nombre || ' '} ${item?.apellido || ''}`.toLowerCase();
+    const matricula = (item?.matricula || '').toString().toLowerCase();
+    const grado = `${item?.grado || ''} ${item?.grupo || ''}`.toLowerCase();
+    return (
+      nombreCompleto.includes(busqueda) ||
+      matricula.includes(busqueda) ||
+      grado.includes(busqueda)
+    );
+  });
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'e') {
+        e.preventDefault(); 
+        e.stopPropagation();
+        
+        if (inputSearchRef.current) {
+          inputSearchRef.current.focus(); 
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   if (!user) return null;
 
   if (loading) {
@@ -84,6 +119,10 @@ function Admin() {
       </header>
 
       <main className="main-content">
+        <div className="search-container">
+          <TextField variant="outlined" size="small" placeholder="Buscar alumno..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} inputRef={inputSearchRef} InputProps={{ startAdornment: (<InputAdornment position="start"><SearchIcon /></InputAdornment>) }} />
+        </div>
+
         <Card className="custom-card">
           <CardHeader
             title={<Typography variant="h5" sx={{ fontWeight: 700, color: '#334155' }}>Listado de alumnos</Typography>}
@@ -101,16 +140,28 @@ function Admin() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {alumnos.map((item) => (
-                  <TableRow key={item.matricula} className="table-row">
-                    <TableCell>
-                      <span className="matricula-badge">{item.matricula}</span>
+                {/* /* 3. MAPEAR EL ARRAY FILTRADO */ }
+                {alumnosFiltrados.length > 0 ? (
+                  alumnosFiltrados.map((item) => (
+                    <TableRow key={item.matricula} className="table-row">
+                      <TableCell>
+                        <span className="matricula-badge">{item.matricula}</span>
+                      </TableCell>
+                      <TableCell sx={{ fontWeight: 600, color: '#1e293b' }}>{item?.nombre} {item?.apellido}</TableCell>
+                      <TableCell sx={{ color: '#64748b' }}>{item?.grado} {item?.grupo}</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', color: item.calificacion_general < 6 ? '#d32f2f' : '#2e7d32' }}>
+                        {item.calificacion_general ?? 'S/C'}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  // Mensaje amigable por si la búsqueda no arroja resultados
+                  <TableRow>
+                    <TableCell colSpan={4} align="center" sx={{ py: 4, color: '#64748b' }}>
+                      No se encontraron alumnos que coincidan con "{searchTerm}"
                     </TableCell>
-                    <TableCell sx={{ fontWeight: 600, color: '#1e293b' }}>{item?.nombre} {item?.apellido}</TableCell>
-                    <TableCell sx={{ color: '#64748b' }}>{item?.grado} {item?.grupo}</TableCell>
-                    <TableCell sx={{ fontWeight: 'bold', color: item.calificacion_general < 6 ? '#d32f2f' : '#2e7d32' }}>{item.calificacion_general ?? 'S/C'}</TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
           </CardContent>

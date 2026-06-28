@@ -60,3 +60,9 @@
     text-transform: none !important;
     font-weight: 600 !important;
 }
+
+.search-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
